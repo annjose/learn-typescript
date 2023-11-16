@@ -12,6 +12,11 @@ console.log(`table_copy[1][0]: ${table_copy[1][0]}`)  // 21
 const tup: [number, number] = [10, 20]; // [10,20]
 console.log(tup);
 
+// let strings: [string] = ['a', 'b']; // error TS2322: Type '[string, string]' is not assignable to type '[string]'.
+//  Note: Here, strings is defined as a tuple. If you want to define it is as an array, you should use string[]
+let strings: string[] = ['a', 'b'];   // OK
+console.log(`strings: ${strings}`);   // strings:a,b
+
 const wordPair: [string, number] = ["ace", 3];
 console.log(wordPair);  // ["ace", 3]
 // const wordPair_2: [string, number] = [3, "ace"];    // error TS2322: Type 'string' is not assignable to type 'number'.
@@ -51,5 +56,5 @@ console.log(identity([1, 2]));      // [1,2]
 function arr_length<T>(arr: T[]): number {
     return arr.length;
 }
-const result = [ arr_length([1, 2]), arr_length(['abc', 'def', 'xyz']), arr_length([]), arr_length([ [11, 22], [33, 44] ]) ];
+const result = [arr_length([1, 2]), arr_length(['abc', 'def', 'xyz']), arr_length([]), arr_length([[11, 22], [33, 44]])];
 console.log(result); // [2, 3, 0, 2]
