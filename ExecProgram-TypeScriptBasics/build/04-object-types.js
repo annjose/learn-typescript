@@ -24,6 +24,6 @@ function extractEmail_2(_a) {
     var email = _a.email;
     return email;
 }
-var email_2 = extractEmail({ email: "abc@example.com" });
+var email_2 = extractEmail_2({ email: "abc@example.com" });
 console.log("email: ".concat(email_2)); // abc@example.com
 //# sourceMappingURL=04-object-types.js.map

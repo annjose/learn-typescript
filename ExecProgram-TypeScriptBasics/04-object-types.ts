@@ -57,5 +57,5 @@ console.log(`email: ${email}`);     // abc@example.com
 function extractEmail_2({email}: { email: string }): string {
     return email;
 }
-const email_2 = extractEmail({ email: "abc@example.com" });
+const email_2 = extractEmail_2({ email: "abc@example.com" });
 console.log(`email: ${email_2}`);     // abc@example.com
