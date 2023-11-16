@@ -79,5 +79,36 @@ var arr = [3, 4, 1, 2];
 var sortedAsc = sortMe(arr, 'asc');
 var sortedDsc = sortMe(arr, 'dsc');
 console.log("sortedAsc: ".concat(sortedAsc, ", sortedDsc: ").concat(sortedDsc)); // sortedAsc: 1,2,3,4, sortedDsc: 4,3,2,1
-// const wrong = sortMe(arr, 'something'); // error TS2345: Argument of type '"something"' is not assignable to parameter of type '"asc" | "dsc"'.
+// const wrong = sortMe(arr, 'ddd'); // error TS2345: Argument of type '"something"' is not assignable to parameter of type '"asc" | "dsc"'.
+// Generic Function Types
+// this is a regular function that takes number array and returns the first number
+function lastFromNumArray(numArray) {
+    return numArray[numArray.length - 1];
+}
+var numbers = [34, 23, 56, 81];
+var strs = ["ab", "cd", "xy"];
+console.log("firstFromNumArray: ".concat(lastFromNumArray(numbers))); // lastFromNumArray: 81
+// this is the generic version of the above method
+function last(arr) {
+    return arr[arr.length - 1];
+}
+console.log("last of numbers: ".concat(last(numbers))); // last of numbers: 81
+console.log("last of strings: ".concat(last(strs))); // last of numbers: xy
+// now we can narrow the function 
+var lastStr = last;
+console.log("lastStr(strs): ".concat(lastStr(strs))); // lastStringOnly(strArray): xy
+// console.log(`lastStr(nums): ${lastStr(numbers)}`); //  error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string[]'.
+var lastBool = last;
+console.log("lastBool: ".concat(lastBool([true, false]))); // lastBool: false
+// QUIZ
+// Write a function that returns its argument as a string. It should take a string, a number, or a boolean and return a string. 
+//  (Remember that .toString() works on these types)
+function stringify(param) {
+    return param.toString();
+}
+console.log("stringify(10): ".concat(stringify(10))); // 10
+console.log("stringify(\"hello\"): ".concat(stringify("hello"))); // hello
+console.log("stringify(true): ".concat(stringify(true)));
+true;
+// console.log(stringify({ name: "Amy" }));    // error TS2345: Argument of type '{ name: string; }' is not assignable to parameter of type 'string | number | boolean'
 //# sourceMappingURL=06-union-types-literal-types.js.map

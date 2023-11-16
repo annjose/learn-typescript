@@ -61,7 +61,7 @@ console.log(one);
 // one = "hello";   // error TS2322: Type '"hello"' is not assignable to type '1'
 
 // If you have a variable of type true, you cannot assign a variable of type boolean to it. (boolean variable can hold true or false)
-function giveBoolean() :boolean {
+function giveBoolean(): boolean {
     return true;
 }
 const b: boolean = giveBoolean(); // OK
@@ -79,7 +79,7 @@ function sortMe(numbers: number[], direction: 'asc' | 'dsc'): number[] {
     const numbers_sortable = numbers.slice();  // clone to array so that we can sort the copy, not the original
 
     numbers_sortable.sort();    // note: this sort() converts elements to strings and compares the sequences of UTF-16 code units values.
-    if(direction === 'dsc') {
+    if (direction === 'dsc') {
         numbers_sortable.reverse();
     }
 
@@ -90,4 +90,43 @@ const arr = [3, 4, 1, 2];
 const sortedAsc = sortMe(arr, 'asc');
 const sortedDsc = sortMe(arr, 'dsc');
 console.log(`sortedAsc: ${sortedAsc}, sortedDsc: ${sortedDsc}`);    // sortedAsc: 1,2,3,4, sortedDsc: 4,3,2,1
-// const wrong = sortMe(arr, 'something'); // error TS2345: Argument of type '"something"' is not assignable to parameter of type '"asc" | "dsc"'.
+// const wrong = sortMe(arr, 'ddd'); // error TS2345: Argument of type '"something"' is not assignable to parameter of type '"asc" | "dsc"'.
+
+// Generic Function Types
+
+// this is a regular function that takes number array and returns the first number
+function lastFromNumArray(numArray: number[]): number {
+    return numArray[numArray.length - 1];
+}
+const numbers = [34, 23, 56, 81];
+const strs = ["ab", "cd", "xy"];
+console.log(`firstFromNumArray: ${lastFromNumArray(numbers)}`);   // lastFromNumArray: 81
+
+// this is the generic version of the above method
+function last<T>(arr: T[]): T {
+    return arr[arr.length - 1];
+}
+console.log(`last of numbers: ${last(numbers)}`);  // last of numbers: 81
+console.log(`last of strings: ${last(strs)}`);  // last of numbers: xy
+
+// now we can define a function type for the above generic function
+type Last<T> = (arr: T[]) => T;
+
+// now we can narrow the function 
+const lastStr: Last<string> = last;
+console.log(`lastStr(strs): ${lastStr(strs)}`);   // lastStringOnly(strArray): xy
+// console.log(`lastStr(nums): ${lastStr(numbers)}`); //  error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string[]'.
+
+const lastBool: Last<boolean> = last;
+console.log(`lastBool: ${lastBool([true, false])}`);    // lastBool: false
+
+// QUIZ
+// Write a function that returns its argument as a string. It should take a string, a number, or a boolean and return a string. 
+//  (Remember that .toString() works on these types)
+function stringify(param: number | string | boolean): string {
+    return param.toString();
+}
+console.log(`stringify(10): ${stringify(10)}`);     // 10
+console.log(`stringify("hello"): ${stringify("hello")}`);   // hello
+console.log(`stringify(true): ${stringify(true)}`); true
+// console.log(stringify({ name: "Amy" }));    // error TS2345: Argument of type '{ name: string; }' is not assignable to parameter of type 'string | number | boolean'
