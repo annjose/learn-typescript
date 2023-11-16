@@ -46,3 +46,31 @@ console.log("aNumber: ", aNumber);   // undefined
 let bNumber: number | undefined = undefined;
 let cNumber: number | undefined = 5;
 console.log(bNumber, cNumber);  // undefined 5
+
+
+// QUIZ
+// Write a function that turns a string | undefined into a number.
+
+// If the argument was undefined, the function should return undefined.
+// If the argument was a string containing a valid number, it should return that number.
+// If the argument was a string without a number, it should return undefined.
+// (You'll want to use the built-in functions parseInt(s: string) and Number.isNaN(n: number).)
+
+console.log("...... QUIZ maybeParseString().....");
+
+function maybeParseString(input: string | undefined): number | undefined {
+    if (typeof input == "string") {
+        const num = parseInt(input);
+        return isNaN(num) ? undefined : num;
+    } else {
+        return undefined;
+    }
+}
+
+console.log(maybeParseString(undefined) === undefined);  // true
+console.log(maybeParseString('3') === 3);                // true
+console.log(maybeParseString('2701') === 2701);          // true
+console.log(maybeParseString('junk') === undefined);     // true
+console.log(maybeParseString('not-a-number') === undefined);
+maybeParseString(null);  // type error if tsc compiler option strictNullChecks is ON
+// maybeParseString(3);    // type error

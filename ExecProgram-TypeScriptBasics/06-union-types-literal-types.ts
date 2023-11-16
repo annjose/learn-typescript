@@ -129,4 +129,35 @@ function stringify(param: number | string | boolean): string {
 console.log(`stringify(10): ${stringify(10)}`);     // 10
 console.log(`stringify("hello"): ${stringify("hello")}`);   // hello
 console.log(`stringify(true): ${stringify(true)}`); true
-// console.log(stringify({ name: "Amy" }));    // error TS2345: Argument of type '{ name: string; }' is not assignable to parameter of type 'string | number | boolean'
+// console.log(stringify({ name: "Amy" }));    // error TS2345: Argument of type '{ name: string; }'
+//  is not assignable to parameter of type 'string | number | boolean'
+
+// QUIZ
+// Write a function that decides whether a user has logged in. Sometimes, it's called with a number of times 
+//  that the user has logged in. Other times, it's called with true. It's never called with false.
+let count: number | true = 5;
+console.log(count > 0);
+
+console.log("------ hasLoggedIn function ------");
+
+function hasLoggedIn(count: number | true) {
+    let userHasLoggedIn = false;
+    if (typeof count === "number") {
+        userHasLoggedIn = (count > 0) ? true : false;
+    } else if (count === true) {
+        userHasLoggedIn = true;
+    }
+    return userHasLoggedIn;
+}
+
+// Author's solution
+function hasLoggedIn_AuthorSolution(count: number | true) {
+    return typeof count == "boolean" ? true : count > 0;
+}
+
+console.log(hasLoggedIn(true));  // true
+console.log(hasLoggedIn(0));     // false
+console.log(hasLoggedIn(1));     // true
+console.log(hasLoggedIn(5));     // true
+console.log(hasLoggedIn(-1));    // false
+// hasLoggedIn(false); // type error TS2345: Argument of type 'false' is not assignable to parameter of type 'number | true'.
