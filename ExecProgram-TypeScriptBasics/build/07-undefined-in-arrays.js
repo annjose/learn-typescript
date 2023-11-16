@@ -24,4 +24,17 @@ var myNum = undefined;
 console.log(myNum); // undefined
 // Solution to resolve this problem (if you want to): compile this code using the compiler options to enable strict type checking.
 // `tsc --noUncheckedIndexedAccess --strictNullChecks 07-undefined-in-arrays.ts`
+console.log("-----Nullability-----");
+// For all the following examples, it is assumed that the tsc compiler option `strictNullChecks` is turned ON. So some of the lines will throw type error
+//  if this is turned OFF, all the code below will compile OK.
+var xy = undefined;
+console.log("xy:", xy); // undefined
+var yz = null; // type error (if tsc --strictNullChecks). OK otherwise
+console.log("yz:", yz); // undefined
+var aNumber = undefined; // type error (if tsc --strictNullChecks). OK otherwise
+// error TS2322: Type 'null' is not assignable to type 'undefined'.
+console.log("aNumber: ", aNumber); // undefined
+var bNumber = undefined;
+var cNumber = 5;
+console.log(bNumber, cNumber); // undefined 5
 //# sourceMappingURL=07-undefined-in-arrays.js.map
