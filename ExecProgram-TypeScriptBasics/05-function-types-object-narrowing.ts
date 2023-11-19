@@ -22,3 +22,20 @@ function addOne(num: number): number {
 }
 const myAddOne: (n: number) => number = addOne;
 console.log(myAddOne(9));
+
+// Object Narrowing
+type User_1 = {
+    email: string
+    admin: boolean
+};
+let amir: User_1 = {
+    email: 'amir@example.com',
+    admin: true,
+};
+
+type HasEmail = {
+    email: string
+};
+let amirEmail: HasEmail = amir;
+
+console.log(amirEmail.email);    // 'amir@example.com' 
