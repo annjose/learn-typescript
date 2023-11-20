@@ -58,6 +58,6 @@ console.log(maybeParseString('3') === 3); // true
 console.log(maybeParseString('2701') === 2701); // true
 console.log(maybeParseString('junk') === undefined); // true
 console.log(maybeParseString('not-a-number') === undefined);
-maybeParseString(null); // type error
-maybeParseString(3); // type error
+maybeParseString(null); // type error if tsc compiler option strictNullChecks is ON
+// maybeParseString(3);    // type error
 //# sourceMappingURL=07-undefined-in-arrays.js.map
